@@ -1,20 +1,37 @@
+using Contexts.Level.Factories;
 using UnityEngine;
+using Zenject;
 
 namespace Basket
 {
     public class BasketSpawner : MonoBehaviour
     {
-        [SerializeField] private Transform container;
-        [SerializeField] private BasketBase prefab;
+        private IBasketFactory _basketFactory;
 
-        public BasketBase Spawn()
+        [Inject]
+        private void Construct(IBasketFactory basketFactory)
         {
-            return Instantiate(prefab, container);
+            _basketFactory = basketFactory;
         }
-
-        public void Destroy(BasketBase basket)
+        
+        private void Start()
         {
-            Object.Destroy(basket);
+            var (firstBasket, secondBasket) = _basketFactory.CreateInitial();
+
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
+            _basketFactory.Create();
         }
     }
 }

@@ -2,11 +2,11 @@
 
 public class PredictionBallMovement : BallMovement
 {
-    public override void Move(Vector2 startMousePosition, Vector2 endMousePosition, float force)
+    public override void Move(Vector2 force)
     {
         gameObject.SetActive(true);
         
-        base.Move(startMousePosition, endMousePosition, force);
+        base.Move(force);
     }
 
     public void ResetPhysicsAndDisable()

@@ -1,12 +1,11 @@
-﻿using Basket.Net;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Basket
 {
     public class BasketBase : MonoBehaviour
     {
-        [SerializeField] private BallCatcher ballCatcher;
+        [SerializeField] private SpriteRenderer cylinder;
 
-        public BallCatcher BallCatcher => ballCatcher;
+        public float Width => cylinder.bounds.size.x;
     }
 }
