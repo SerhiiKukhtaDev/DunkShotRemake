@@ -41,7 +41,7 @@ namespace Basket.Net
             ball.BallMovement.ResetPhysics();
 
             _fixDisposable = 
-                Observable.EveryUpdate().Subscribe(_ => ball.transform.position = targetPoint.position);
+                Observable.EveryUpdate().Subscribe(_ => ball.transform.position = targetPoint.position).AddTo(this);
 
             _caught.OnNext(ball);
         }

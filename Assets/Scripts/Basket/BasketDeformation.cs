@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Basket.Net;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -48,12 +47,12 @@ namespace Basket
             var ct = this.GetCancellationTokenOnDestroy();
             
             await AnimateNet(minTension, catchAnimationDuration, ct);
-            await basket.DORotate(Vector3.zero, 0.5f).SetEase(Ease.Linear).WithCancellation(ct);
+            await basket.DORotate(Vector3.zero, 0.5f).SetEase(Ease.Linear).SetAutoKill().WithCancellation(ct);
         }
 
         private async UniTask AnimateNet(float endValue, float time, CancellationToken ct, Ease ease = Ease.Flash)
         {
-            await net.DOScaleY(endValue, time).SetEase(ease).WithCancellation(ct);
+            await net.DOScaleY(endValue, time).SetEase(ease).SetAutoKill().WithCancellation(ct);
         }
     }
 }

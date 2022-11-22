@@ -1,11 +1,12 @@
 ﻿using Basket.Net;
+using UniRx;
 using UnityEngine;
 
 namespace Basket
 {
     public class BasketBase : MonoBehaviour
     {
-        [SerializeField] private BasketInput input;
+        [SerializeField] private BasketDeformation deformation;
         [SerializeField] private BallCatcher catcher;
         [SerializeField] private Transform startPoint;
 
@@ -13,6 +14,11 @@ namespace Basket
 
         public BallCatcher Catcher => catcher;
 
-        public BasketInput Input => input;
+        public BasketDeformation Deformation => deformation;
+
+        private void Start()
+        {
+            catcher.Caught.Subscribe(ball => ball.BallMovement.NotifyInBasket(this)).AddTo(this);
+        }
     }
 }

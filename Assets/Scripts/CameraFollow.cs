@@ -11,6 +11,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float moveForce = 10;
     [SerializeField] private float moveDelay = 0.2f;
     [SerializeField] private float returnTime = 0.4f;
+    [SerializeField] private BasketInput input;
     [SerializeField] private BasketSpawner spawner;
     [SerializeField] private Camera targetCamera;
     [SerializeField] private BallFacade ball;
@@ -25,7 +26,7 @@ public class CameraFollow : MonoBehaviour
 
     private async void OnBallFlight(Vector2 vel)
     {
-        var forceDelta = spawner.CurrentBasket.Input.ForceDelta;
+        var forceDelta = input.ForceDelta;
         
         if (forceDelta <= MinForceDelta) return;
         
@@ -34,14 +35,15 @@ public class CameraFollow : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(moveDelay));
         
         await targetCamera.transform.DOMoveY(_prevCameraPosition.y 
-            + moveForce * forceDelta, vel.magnitude / -Physics.gravity.y - moveDelay);
+                                             + moveForce * forceDelta, vel.magnitude / -Physics.gravity.y - moveDelay);
 
-        Observable.EveryUpdate().TakeUntil(spawner.CurrentBasket.Catcher.Caught.Merge(spawner.NextBasket.Catcher.Caught)).Subscribe(_ =>
-        {
-            if (ball.transform.position.y < spawner.NextBasket.StartPoint.position.y)
-            {
-                targetCamera.transform.DOMoveY(_prevCameraPosition.y, returnTime);
-            }
-        }).AddTo(this);
+        var disposable = Observable
+            .EveryUpdate()
+            .SkipWhile(_ => ball.transform.position.y > spawner.NextBasket.StartPoint.position.y)
+            .First()
+            .Subscribe(_ => targetCamera.transform.DOMoveY(_prevCameraPosition.y, returnTime))
+            .AddTo(this);
+
+        ball.BallMovement.InBasket.First().Subscribe(_ => disposable.Dispose()).AddTo(this);
     }
 }

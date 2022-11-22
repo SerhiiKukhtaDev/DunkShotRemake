@@ -745,10 +745,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109345156965684912}
-  - component: {fileID: 5940350403484668364}
   - component: {fileID: 5940350403484668365}
   - component: {fileID: 5914659908980355348}
-  - component: {fileID: 5940350403484668366}
   m_Layer: 0
   m_Name: Basket
   m_TagString: Untagged
@@ -774,22 +772,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5940350403484668364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109345156965684913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8defd73014004bda81bc92b211cac96e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 10
-  maxForce: 10
-  ballCatcher: {fileID: 4109345155807654158}
-  basketDeformation: {fileID: 5940350403484668365}
 --- !u!114 &5940350403484668365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,22 +804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f101a1bdbe94e32a3a5826c8f48172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 5940350403484668364}
+  deformation: {fileID: 5940350403484668365}
   catcher: {fileID: 4109345155807654158}
   startPoint: {fileID: 1970094515235280702}
---- !u!114 &5940350403484668366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109345156965684913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf2b1c1b36932142b1c6b615fbd46d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 4109345156965684912}
 --- !u!1 &4109345157056926657
 GameObject:
   m_ObjectHideFlags: 0

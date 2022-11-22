@@ -1,3 +1,4 @@
+using System;
 using Contexts.Level.Factories;
 using UniRx;
 using UnityEngine;
@@ -8,7 +9,10 @@ namespace Basket
     public class BasketSpawner : MonoBehaviour
     {
         [SerializeField] private Transform[] startPoints = new Transform[2];
-        
+
+        public IObservable<BasketBase> NewBasketCreated => _newBasketCreated;
+        private readonly Subject<BasketBase> _newBasketCreated = new Subject<BasketBase>();
+
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
         private IBasketFactory _basketFactory;
@@ -39,6 +43,7 @@ namespace Basket
             _currentBasket = _nextBasket;
             _nextBasket = _basketFactory.Create();
             _nextBasket.Catcher.Caught.First().Subscribe(_ => CreateNext()).AddTo(_disposable);
+            _newBasketCreated.OnNext(_nextBasket);
         }
     }
 }

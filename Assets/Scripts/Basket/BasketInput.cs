@@ -10,11 +10,9 @@ namespace Basket
 {
     public class BasketInput : MonoBehaviour
     {
+        [SerializeField] private BallFacade ballFacade;
         [Range(1, 10)] [SerializeField] private float force = 50;
         [Range(1, 20)] [SerializeField] private float maxForce;
-        
-        [SerializeField] private BallCatcher ballCatcher;
-        [SerializeField] private BasketDeformation basketDeformation;
 
         private IInputWrapper _inputWrapper;
         
@@ -37,14 +35,18 @@ namespace Basket
         {
             _maxForceMagnitude = new Vector2(maxForce, maxForce).magnitude;
 
-            ballCatcher.Caught.Subscribe(ball =>
+            ballFacade.BallMovement.InBasket.Subscribe(basket =>
             {
-                _updateDisposable = Observable.EveryUpdate()
-                    .Subscribe(_ => UpdateWhenInBasket(ball.BallMovement, ball.BallPrediction));
+                _updateDisposable = Observable
+                    .EveryUpdate()
+                    .Subscribe(_ => UpdateWhenInBasket(ballFacade.BallMovement, ballFacade.BallPrediction, 
+                        basket.Deformation, basket.Catcher)).AddTo(this);
+                
             }).AddTo(this);
         }
 
-        private void UpdateWhenInBasket(MainBallMovement mainBall, BallPrediction ballPrediction)
+        private void UpdateWhenInBasket(MainBallMovement mainBall, BallPrediction ballPrediction, 
+            BasketDeformation basketDeformation, BallCatcher ballCatcher)
         {
             if (_inputWrapper.IsMouseDown)
                 _startMousePosition = _inputWrapper.WorldMousePosition;

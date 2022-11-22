@@ -1,4 +1,5 @@
 ﻿using System;
+using Basket;
 using UniRx;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ namespace Ball
     {
         public IObservable<Vector2> Moved => _moved;
         private readonly Subject<Vector2> _moved = new Subject<Vector2>();
+
+        public IObservable<BasketBase> InBasket => _inBasket;
+        private readonly Subject<BasketBase> _inBasket = new Subject<BasketBase>();
 
         public override void Move(Vector2 force)
         {
@@ -27,6 +31,11 @@ namespace Ball
         public void StartPhysics()
         {
             rigidbody.constraints = RigidbodyConstraints2D.None;
+        }
+
+        public void NotifyInBasket(BasketBase basket)
+        {
+            _inBasket.OnNext(basket);
         }
     }
 }
