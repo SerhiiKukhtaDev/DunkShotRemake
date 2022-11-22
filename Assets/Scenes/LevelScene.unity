@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7195328041522292718, guid: 9c95d1f2b739bed4ea5d72e96af9b569, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 7195328041522292718, guid: 9c95d1f2b739bed4ea5d72e96af9b569, type: 3}
       propertyPath: m_LocalPosition.y
@@ -243,6 +243,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3366.563, y: 1.5439451}
   m_EdgeRadius: 0
+--- !u!114 &270905940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1146581684543290060, guid: 9c95d1f2b739bed4ea5d72e96af9b569, type: 3}
+  m_PrefabInstance: {fileID: 114574809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552d7a070e8a4861aec1e46968e1e6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &390530144
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +376,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -389,8 +401,8 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8959386, g: 0.8962264, b: 0.8826985, a: 0}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.21360357, g: 0.21698111, b: 0.20347098, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -438,6 +450,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71808c646a53af4f8da8e787023cc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveForce: 3
+  spawner: {fileID: 1362432359}
+  targetCamera: {fileID: 519420031}
+  ball: {fileID: 270905940}
 --- !u!1 &808505928
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa0135aeed9d4341bcc1f776a0dbd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoints:
+  - {fileID: 513575347}
+  - {fileID: 2012082860}
 --- !u!4 &1362432360
 Transform:
   m_ObjectHideFlags: 0
@@ -820,9 +851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86e6b355b274fa0b54387ca18248e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoints:
-  - {fileID: 513575347}
-  - {fileID: 2012082860}
   spawnAreas:
   - {fileID: 2134710808}
   - {fileID: 449906216}

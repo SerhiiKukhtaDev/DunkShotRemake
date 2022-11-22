@@ -8,7 +8,7 @@ namespace Contexts.Level.Factories
 {
     public interface IBasketFactory : ICustomFactory<BasketBase>
     {
-        (BasketBase, BasketBase) CreateInitial();
+        (BasketBase, BasketBase) CreateInitial(Transform[] spawnPoints);
     }
 
     public class BasketFactory : IBasketFactory
@@ -16,7 +16,6 @@ namespace Contexts.Level.Factories
         private readonly DiContainer _diContainer;
         private readonly BasketBase _prefab;
         private readonly float _height;
-        private readonly Transform[] _spawnPoints;
         private readonly RectTransform[] _spawnAreas;
         private readonly Camera _mainCamera;
         private readonly ScreenScaleNotifier _scaleNotifier;
@@ -24,25 +23,24 @@ namespace Contexts.Level.Factories
         private BasketBase _lastCreated;
         private int _lastSpawnAreaIndex;
 
-        public BasketFactory(DiContainer diContainer, BasketBase prefab, float height, ScreenScaleNotifier scaleNotifier, 
-            Transform[] spawnPoints, RectTransform[] spawnAreas, Camera mainCamera)
+        public BasketFactory(DiContainer diContainer, BasketBase prefab, float height, ScreenScaleNotifier scaleNotifier,
+            RectTransform[] spawnAreas, Camera mainCamera)
         {
             _scaleNotifier = scaleNotifier;
             _diContainer = diContainer;
             _prefab = prefab;
             _height = height;
-            _spawnPoints = spawnPoints;
             _spawnAreas = spawnAreas;
             _mainCamera = mainCamera;
         }
 
-        public (BasketBase, BasketBase) CreateInitial()
+        public (BasketBase, BasketBase) CreateInitial(Transform[] spawnPoints)
         {
             var firstBasket = CreateAdaptive();
-            firstBasket.transform.position = _spawnPoints[0].position;
+            firstBasket.transform.position = spawnPoints[0].position;
 
             var secondBasket = CreateAdaptive();
-            secondBasket.transform.position = _spawnPoints[1].position.AddY(_height);
+            secondBasket.transform.position = spawnPoints[1].position.AddY(_height);
             
             _lastCreated = secondBasket;
             _lastSpawnAreaIndex = 1;

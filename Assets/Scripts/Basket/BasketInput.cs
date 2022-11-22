@@ -1,6 +1,6 @@
 ﻿using System;
+using Ball;
 using Basket.Net;
-using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Utils;
@@ -12,6 +12,7 @@ namespace Basket
     {
         [Range(1, 10)] [SerializeField] private float force = 50;
         [Range(1, 20)] [SerializeField] private float maxForce;
+        
         [SerializeField] private BallCatcher ballCatcher;
         [SerializeField] private BasketDeformation basketDeformation;
 
@@ -24,12 +25,14 @@ namespace Basket
         
         private float _maxForceMagnitude;
 
+        public float ForceDelta { get; private set; }
+
         [Inject]
         private void Construct(IInputWrapper inputWrapper)
         {
             _inputWrapper = inputWrapper;
         }
-        
+
         private void Start()
         {
             _maxForceMagnitude = new Vector2(maxForce, maxForce).magnitude;
@@ -37,7 +40,7 @@ namespace Basket
             ballCatcher.Caught.Subscribe(ball =>
             {
                 _updateDisposable = Observable.EveryUpdate()
-                    .Subscribe(_ => UpdateWhenInBasket(ball, ball.GetComponent<BallPrediction>()));
+                    .Subscribe(_ => UpdateWhenInBasket(ball.BallMovement, ball.BallPrediction));
             }).AddTo(this);
         }
 
@@ -48,12 +51,12 @@ namespace Basket
 
             if (_inputWrapper.LeftMousePressed)
             {
-                var forceDelta = GetMaxForceDelta();
+                ForceDelta = GetMaxForceDelta();
                 _dragPosition = _inputWrapper.WorldMousePosition;
                 _forceVector = GetCurrentForceVector();
             
-                basketDeformation.Deform(_forceVector, forceDelta);
-                Predict(mainBall, ballPrediction, _forceVector, forceDelta);
+                basketDeformation.Deform(_forceVector, ForceDelta);
+                Predict(mainBall, ballPrediction, _forceVector, ForceDelta);
             }
 
             if (_inputWrapper.IsMouseUp)

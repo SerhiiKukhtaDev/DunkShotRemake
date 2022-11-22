@@ -1,4 +1,5 @@
 using System;
+using Ball;
 using UniRx;
 using UnityEngine;
 
@@ -12,11 +13,8 @@ namespace Basket.Net
         private bool _isBallInBasket;
         private IDisposable _fixDisposable;
         
-        public IObservable<MainBallMovement> Caught => _caught;
-        private readonly Subject<MainBallMovement> _caught = new Subject<MainBallMovement>();
-
-        public IObservable<Unit> Left => _left;
-        private readonly Subject<Unit> _left = new Subject<Unit>();
+        public IObservable<BallFacade> Caught => _caught;
+        private readonly Subject<BallFacade> _caught = new Subject<BallFacade>();
 
         private void Start()
         {
@@ -25,9 +23,6 @@ namespace Basket.Net
                 .Where(_ => !_isBallInBasket)
                 .Subscribe(OnCollision)
                 .AddTo(this);
-
-            collider.TriggerExit.Where(col => col.TryGetComponent(out MainBallMovement movement))
-                .Subscribe(_ => _left.OnNext(Unit.Default)).AddTo(this);
         }
 
         public void StopCatching(MainBallMovement ballMovement)
@@ -37,14 +32,13 @@ namespace Basket.Net
             ballMovement.StartPhysics();
             _isBallInBasket = false;
         }
-
-        //todo move to serializeField
-        private async void OnCollision(GameObject obj)
+        
+        private void OnCollision(GameObject obj)
         {
-            if (!obj.TryGetComponent(out MainBallMovement ball)) return;
+            if (!obj.TryGetComponent(out BallFacade ball)) return;
 
             _isBallInBasket = true;
-            ball.ResetPhysics();
+            ball.BallMovement.ResetPhysics();
 
             _fixDisposable = 
                 Observable.EveryUpdate().Subscribe(_ => ball.transform.position = targetPoint.position);

@@ -12,6 +12,12 @@ namespace Utils
             return new Vector2(x, y);
         }
 
+        public static void SetY(this Transform transform, Vector2 target)
+        {
+            var position = transform.position;
+            transform.position = new Vector3(position.x, target.y, position.z);
+        }
+
         public static Vector2 AddY(this Vector3 vector, float y)
         {
             return new Vector2(vector.x, vector.y + y);
