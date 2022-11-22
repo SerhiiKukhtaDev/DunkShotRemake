@@ -20,10 +20,10 @@ namespace Basket
 
         private void Start()
         {
-            catcher.Caught.Subscribe(_ => AnimateCatch()).AddTo(this);
+            catcher.Caught.Subscribe(_ => AnimateCatch().Forget()).AddTo(this);
         }
 
-        private async void AnimateCatch()
+        private async UniTaskVoid AnimateCatch()
         {
             var ct = this.GetCancellationTokenOnDestroy();
             

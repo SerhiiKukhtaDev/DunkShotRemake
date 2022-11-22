@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8791718583480380411}
   - component: {fileID: 9080216052806411566}
   - component: {fileID: 9120768951100249235}
+  - component: {fileID: 5268289541983831999}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -97,3 +98,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c325aa5425f2a4da9d70a4b525fd6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathTime: 0.5
+--- !u!58 &5268289541983831999
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497727713775493921}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.01313597}
+  serializedVersion: 2
+  m_Radius: 0.48686403

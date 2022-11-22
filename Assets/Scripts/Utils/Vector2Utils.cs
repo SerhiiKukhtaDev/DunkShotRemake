@@ -22,5 +22,10 @@ namespace Utils
         {
             return new Vector2(vector.x, vector.y + y);
         }
+
+        public static Vector2 AddValue(this Vector3 vector, float value)
+        {
+            return new Vector2(vector.x + value, vector.y + value);
+        }
     }
 }
