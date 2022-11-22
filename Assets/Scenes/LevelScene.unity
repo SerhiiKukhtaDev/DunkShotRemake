@@ -826,6 +826,7 @@ GameObject:
   - component: {fileID: 1154668595}
   - component: {fileID: 1154668597}
   - component: {fileID: 1154668596}
+  - component: {fileID: 1154668598}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -886,7 +887,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 0
 --- !u!222 &1154668597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -895,6 +896,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154668594}
   m_CullTransparentMesh: 1
+--- !u!114 &1154668598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154668594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db1ec7e30646ee429a0d12e74c3da2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1154668596}
 --- !u!1 &1278518624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1212,7 @@ GameObject:
   - component: {fileID: 1834435105}
   - component: {fileID: 1834435108}
   - component: {fileID: 1834435109}
+  - component: {fileID: 1834435110}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1236,6 +1251,7 @@ MonoBehaviour:
   - {fileID: 1834435105}
   - {fileID: 1834435108}
   - {fileID: 1834435109}
+  - {fileID: 1834435110}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1298,6 +1314,18 @@ MonoBehaviour:
   - {fileID: 449906216}
   prefab: {fileID: 5914659908980355348, guid: 42e6b14ff3ef45842a603e14082d2e55, type: 3}
   height: 2.5
+--- !u!114 &1834435110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834435104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf80b2913a840218f0e51fc2a59fc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1942027126
 GameObject:
   m_ObjectHideFlags: 0

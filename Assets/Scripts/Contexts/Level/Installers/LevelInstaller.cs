@@ -1,8 +1,9 @@
+using Contexts.Level.Services;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Contexts.Installers
+namespace Contexts.Level.Installers
 {
     public class LevelInstaller : MonoInstaller
     {
@@ -16,6 +17,7 @@ namespace Contexts.Installers
 
             Container.BindInterfacesAndSelfTo<ScreenScaleNotifier>().AsSingle();
             Container.BindInstance(scaler).WhenInjectedInto<ScreenScaleNotifier>();
+            Container.BindInterfacesTo<LevelGameProgressSignalsListener>().AsSingle();
         }
     }
 }

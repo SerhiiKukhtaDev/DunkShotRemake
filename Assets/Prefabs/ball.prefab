@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7195328041522292717}
   - component: {fileID: 7195328041522292714}
   - component: {fileID: -1146581684543290060}
+  - component: {fileID: 270905941}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
@@ -169,3 +170,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballMovement: {fileID: 7195328041522292717}
   ballPrediction: {fileID: 7195328041522292714}
+  ballScore: {fileID: 270905941}
+--- !u!114 &270905941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7195328041522292706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180f610680c996b4b85d2a0c53c2c1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboTime: 5

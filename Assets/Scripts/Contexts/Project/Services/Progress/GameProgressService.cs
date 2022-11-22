@@ -15,9 +15,11 @@ namespace Contexts.Project.Services.Progress
     public interface IGameProgressService
     {
         GameProgressReactive GameProgress { get; }
+
+        void MakeTransition(GameProgressTransition transition);
     }
 
-    public partial class GameProgressService : IInitializable, IDisposable, IGameProgressLoader, IGameProgressService
+    public partial class GameProgressService : IGameProgressLoader, IGameProgressService
     {
         private readonly SignalBus _signalBus;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
@@ -30,21 +32,10 @@ namespace Contexts.Project.Services.Progress
         {
             _signalBus = signalBus;
         }
-        
-        public void Initialize()
-        {
-            _signalBus.GetStream<StarPickedSignal>().Subscribe(_ => UpdateStars()).AddTo(_disposable);
-        }
 
-        private void UpdateStars()
+        public void MakeTransition(GameProgressTransition transition)
         {
-            _gameProgress.Stars.Value += 1;
-            Save();
-        }
-
-        public void Dispose()
-        {
-            
+            transition.Execute(_gameProgress);
         }
     }
 }

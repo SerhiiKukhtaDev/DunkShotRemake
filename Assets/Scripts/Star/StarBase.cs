@@ -17,24 +17,19 @@ namespace Star
         private StarCountView _startView;
         private Transform _target;
         private Transform _bezierCenterPoint;
-        private SignalBus _signalBus;
+        private SignalBus _signals;
 
-        [Inject]
-        private void Construct(SignalBus signalBus)
-        {
-            _signalBus = signalBus;
-        }
-        
         private void Start()
         {
             this.OnTriggerEnter2DAsObservable()
-                .FirstOrDefault(col => col.TryGetComponent(out BallFacade _))
+                .First(col => col.TryGetComponent(out BallFacade _))
                 .Subscribe(_ => OnPicked().Forget())
                 .AddTo(this);
         }
 
-        public void Initialize(Transform bezierCenterPoint, StarCountView starView)
+        public void Initialize(Transform bezierCenterPoint, StarCountView starView, SignalBus signals)
         {
+            _signals = signals;
             _bezierCenterPoint = bezierCenterPoint;
             _startView = starView;
             _target = starView.StarImage.transform;
@@ -42,7 +37,7 @@ namespace Star
 
         private async UniTaskVoid OnPicked()
         {
-            _signalBus.Fire<StarPickedSignal>();
+            _signals.Fire<StarPickedSignal>();
             
             var targetPosition = _target.position;
             

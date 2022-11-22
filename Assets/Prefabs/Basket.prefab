@@ -747,6 +747,7 @@ GameObject:
   - component: {fileID: 4109345156965684912}
   - component: {fileID: 5940350403484668365}
   - component: {fileID: 5914659908980355348}
+  - component: {fileID: 3262864119784954299}
   m_Layer: 0
   m_Name: Basket
   m_TagString: Untagged
@@ -807,6 +808,19 @@ MonoBehaviour:
   deformation: {fileID: 5940350403484668365}
   catcher: {fileID: 4109345155807654158}
   startPoint: {fileID: 1970094515235280702}
+--- !u!114 &3262864119784954299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109345156965684913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714318e826d8d064f8bbae16c60a6fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  catcher: {fileID: 4109345155807654158}
 --- !u!1 &4109345157056926657
 GameObject:
   m_ObjectHideFlags: 0

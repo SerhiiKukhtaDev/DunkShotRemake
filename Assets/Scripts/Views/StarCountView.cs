@@ -32,8 +32,10 @@ namespace Views
 
         public void AnimateAndUpdateCount()
         {
+            starsCount.text = _progressService.GameProgress.Stars.Value.ToString();
+            
             starImage.transform.DOScale(starImage.transform.localScale.AddValue(animationTime), 
-                animationTime).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Flash);
+                animationTime).SetLoops(2, LoopType.Yoyo).SetEase(Ease.Flash).SetAutoKill();
         }
     }
 }
