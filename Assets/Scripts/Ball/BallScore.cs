@@ -1,6 +1,6 @@
+using Basket;
 using Contexts.Level.Signals;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Ball
@@ -35,7 +35,7 @@ namespace Ball
             }
         }
 
-        public void Award()
+        public void Award(BasketBonusChecker basket)
         {
             _enteredBasketCount++;
 
@@ -45,7 +45,7 @@ namespace Ball
                 _currentComboTime = comboTime;
             }
             
-            _signals.Fire(new BallHitTheBasketSignal(_enteredBasketCount));
+            _signals.Fire(new BallHitTheBasketSignal(_enteredBasketCount, basket));
         }
     }
 }

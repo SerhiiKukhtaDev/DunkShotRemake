@@ -16,7 +16,7 @@ namespace Basket
 
         private void OnCaught(BallFacade ball)
         {
-            ball.BallScore.Award();
+            ball.BallScore.Award(this);
         }
     }
 }

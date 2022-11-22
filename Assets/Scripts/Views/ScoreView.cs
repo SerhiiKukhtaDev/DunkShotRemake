@@ -1,4 +1,3 @@
-using System;
 using Contexts.Project.Services.Progress;
 using UniRx;
 using UnityEngine;
