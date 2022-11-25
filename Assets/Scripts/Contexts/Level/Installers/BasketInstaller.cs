@@ -3,13 +3,12 @@ using Contexts.Level.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace Contexts.Installers
+namespace Contexts.Level.Installers
 {
     public class BasketInstaller : MonoInstaller
     {
-        [SerializeField] private RectTransform[] spawnAreas = new RectTransform[2];
+        [SerializeField] private BasketSpawner spawner;
         [SerializeField] private BasketBase prefab;
-        [SerializeField] private float height;
 
         public override void InstallBindings()
         {
@@ -19,14 +18,14 @@ namespace Contexts.Installers
                 .FromSubContainerResolve()
                 .ByMethod(BindFactory)
                 .AsSingle();
+
+            Container.Bind<IBasketSpawner>().FromInstance(spawner).AsSingle();
         }
 
         private void BindFactory(DiContainer container)
         {
             container.Bind<BasketFactory>().AsSingle();
-            container.BindInstance(height);
             container.BindInstance(prefab);
-            container.BindInstance(spawnAreas);
         }
     }
 }

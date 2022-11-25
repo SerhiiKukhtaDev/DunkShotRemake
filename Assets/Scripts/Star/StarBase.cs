@@ -19,12 +19,14 @@ namespace Star
         private Transform _bezierCenterPoint;
         private SignalBus _signals;
 
+        private readonly CompositeDisposable _disposable = new CompositeDisposable();
+
         private void Start()
         {
             this.OnTriggerEnter2DAsObservable()
                 .First(col => col.TryGetComponent(out BallFacade _))
                 .Subscribe(_ => OnPicked().Forget())
-                .AddTo(this);
+                .AddTo(_disposable);
         }
 
         public void Initialize(Transform bezierCenterPoint, StarCountView starView, SignalBus signals)
@@ -48,6 +50,12 @@ namespace Star
             _startView.AnimateAndUpdateCount();
 
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            if (_disposable.Count > 0 && !_disposable.IsDisposed)
+                _disposable.Dispose();
         }
     }
 }

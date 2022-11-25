@@ -8,7 +8,7 @@ namespace Ball
 
         public virtual void Move(Vector2 force)
         {
-            rigidbody.angularVelocity = 100;
+            rigidbody.angularVelocity = 100f;
             rigidbody.velocity = force;
         }
     }

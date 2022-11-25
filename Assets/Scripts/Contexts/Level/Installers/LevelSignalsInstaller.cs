@@ -9,6 +9,13 @@ namespace Contexts.Level.Installers
         {
             Container.DeclareSignal<StarPickedSignal>();
             Container.DeclareSignal<BallHitTheBasketSignal>();
+            
+            Container.DeclareSignal<GamePausedSignal>();
+            Container.DeclareSignal<GameResumedSignal>();
+            
+            Container.DeclareSignal<LoadMenuSignal>();
+            Container.DeclareSignal<ReloadLevelSignal>();
+            Container.DeclareSignal<GameLoseSignal>();
         }
     }
 }

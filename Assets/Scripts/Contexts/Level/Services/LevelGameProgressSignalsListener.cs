@@ -42,6 +42,7 @@ namespace Contexts.Level.Services
 
         public void Dispose()
         {
+            _gameProgressService.MakeTransition(new ResetScoreTransition());
             _disposable.Dispose();
         }
     }

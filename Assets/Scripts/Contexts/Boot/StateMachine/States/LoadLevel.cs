@@ -1,21 +1,21 @@
-﻿using Contexts.Project.Services;
-using Core.Constants;
+﻿using Contexts.Level.Installers;
+using Contexts.Project.Services;
 using Core.StateMachineMediator;
 
 namespace Contexts.Boot.StateMachine.States
 {
-    public class LoadMenuState : StateBehaviour
+    public class LoadLevel : StateBehaviour
     {
         private readonly ISceneLoader _sceneLoader;
 
-        public LoadMenuState(ISceneLoader sceneLoader)
+        public LoadLevel(ISceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
         }
         
         protected override async void OnEnter()
         {
-            await _sceneLoader.Load(Scenes.LevelScene, default);
+            await _sceneLoader.LoadLevel(LoadLevelMode.Menu);
         }
     }
 }
