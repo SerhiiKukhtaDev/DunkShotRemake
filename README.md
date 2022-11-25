@@ -14,4 +14,4 @@ Test task for Vira Games
 
 ## Demo
 
-https://www.youtube.com/watch?v=vnCyOJCZMlE&ab_channel=СергійКухта
+https://youtube.com/shorts/JG_FaN3aCK8
