@@ -1,16 +1,16 @@
 using Contexts.Project.Services;
-using DG.Tweening;
+using ScriptableObjects;
 using ScriptableObjects.Settings.Base;
 using ScriptableObjects.Settings.Base.Interfaces;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class Background : MonoBehaviour
 {
     [SerializeField] private new Camera camera;
-    [SerializeField] private Color lightThemeColor;
-    [SerializeField] private Color blackThemeColor;
-    
+    [SerializeField] private BackgroundSettings backgroundSettings;
+
     private ISettingsService _settingsService;
     private ISetting<bool> _useNightModeSetting;
 
@@ -23,6 +23,10 @@ public class Background : MonoBehaviour
     private void Start()
     {
         _useNightModeSetting = _settingsService.GetSetting<bool, UseNightModeSetting>();
-        camera.backgroundColor = _useNightModeSetting.Setting.Value ? blackThemeColor : lightThemeColor;
+
+        _useNightModeSetting.Setting.Subscribe(value =>
+        {
+            camera.backgroundColor = value ? backgroundSettings.BlackThemeColor : backgroundSettings.LightThemeColor;
+        }).AddTo(this);
     }
 }

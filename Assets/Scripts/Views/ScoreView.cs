@@ -1,14 +1,14 @@
 using Contexts.Project.Services.Progress;
+using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Views
 {
     public class ScoreView : MonoBehaviour
     {
-        [SerializeField] private Text scoreText;
+        [SerializeField] private TMP_Text scoreText;
         
         private IGameProgressService _progressService;
 

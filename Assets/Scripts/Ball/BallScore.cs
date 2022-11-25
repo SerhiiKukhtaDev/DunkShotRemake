@@ -1,7 +1,9 @@
 using Basket;
+using Contexts.Level.Services.Audio;
 using Contexts.Level.Signals;
 using UnityEngine;
 using Zenject;
+using AudioType = ScriptableObjects.Audios.AudioType;
 
 namespace Ball
 {
@@ -14,10 +16,12 @@ namespace Ball
         private float _currentComboTime;
         
         private SignalBus _signals;
+        private IAudioService _audioService;
 
         [Inject]
-        private void Construct(SignalBus signals)
+        private void Construct(SignalBus signals, IAudioService audioService)
         {
+            _audioService = audioService;
             _signals = signals;
         }
         
@@ -44,6 +48,8 @@ namespace Ball
                 _comboEnabled = true;
                 _currentComboTime = comboTime;
             }
+            
+            _audioService.Play(_enteredBasketCount > 1 ? AudioType.PerfectHit : AudioType.NotPerfectHit);
             
             _signals.Fire(new BallHitTheBasketSignal(_enteredBasketCount, basket));
         }

@@ -1,4 +1,5 @@
 ﻿using Basket;
+using Contexts.Level.Services;
 using Core.Factories;
 using UnityEngine;
 using Utils;
@@ -8,39 +9,41 @@ namespace Contexts.Level.Factories
 {
     public interface IBasketFactory : ICustomFactory<BasketBase>
     {
-        (BasketBase, BasketBase) CreateInitial(Transform[] spawnPoints);
+        (BasketBase, BasketBase) CreateInitial(float height);
     }
 
     public class BasketFactory : IBasketFactory
     {
         private readonly DiContainer _diContainer;
         private readonly BasketBase _prefab;
-        private readonly float _height;
         private readonly RectTransform[] _spawnAreas;
         private readonly Camera _mainCamera;
         private readonly ScreenScaleNotifier _scaleNotifier;
+        private readonly SpawnPoints _spawnPoints;
 
         private BasketBase _lastCreated;
         private int _lastSpawnAreaIndex;
+        private float _height;
 
-        public BasketFactory(DiContainer diContainer, BasketBase prefab, float height, ScreenScaleNotifier scaleNotifier,
-            RectTransform[] spawnAreas, Camera mainCamera)
+        public BasketFactory(DiContainer diContainer, BasketBase prefab, ScreenScaleNotifier scaleNotifier,
+            SpawnPoints spawnPoints, Camera mainCamera)
         {
+            _spawnPoints = spawnPoints;
             _scaleNotifier = scaleNotifier;
             _diContainer = diContainer;
             _prefab = prefab;
-            _height = height;
-            _spawnAreas = spawnAreas;
+            _spawnAreas = spawnPoints.SpawnAreas;
             _mainCamera = mainCamera;
         }
 
-        public (BasketBase, BasketBase) CreateInitial(Transform[] spawnPoints)
+        public (BasketBase, BasketBase) CreateInitial(float height)
         {
+            _height = height;
             var firstBasket = CreateAdaptive();
-            firstBasket.transform.position = spawnPoints[0].position;
+            firstBasket.transform.position = _spawnPoints.FirstSpawnPoint.position;
 
             var secondBasket = CreateAdaptive();
-            secondBasket.transform.position = spawnPoints[1].position.AddY(_height);
+            secondBasket.transform.position = _spawnPoints.SecondSpawnPoint.position.AddY(height);
             
             _lastCreated = secondBasket;
             _lastSpawnAreaIndex = 1;
@@ -55,7 +58,7 @@ namespace Contexts.Level.Factories
 
             basket.transform.SetPosition(randomPosition);
 
-            SetPositionByLastCreated(basket);
+            SetPositionByLastCreated(basket, _height);
             _lastCreated = basket;
 
             return basket;
@@ -79,13 +82,13 @@ namespace Contexts.Level.Factories
                 new Vector2(Random.Range(rectRight.anchorMax.x, rectRight.anchorMin.x), 0));
         }
 
-        private void SetPositionByLastCreated(BasketBase basket)
+        private void SetPositionByLastCreated(BasketBase basket, float height)
         {
             var target = basket.transform;
             var position = target.position;
             
             target.SetPosition(new Vector2(position.x, _lastCreated.transform.position.y));
-            target.AddYPos(_height);
+            target.AddYPos(height);
         }
 
         private BasketBase CreateAdaptive()

@@ -1,10 +1,9 @@
 ﻿using Ball;
-using Contexts.Level;
-using Core.Factories;
+using Contexts.Level.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace Installers
+namespace Contexts.Level.Installers
 {
     public class BallInstaller : MonoInstaller
     {
@@ -13,7 +12,7 @@ namespace Installers
         public override void InstallBindings()
         {
             Container
-                .Bind<ICustomFactory<Vector2, BallFacade>>()
+                .Bind<IBallFactory>()
                 .To<BallFactory>()
                 .FromSubContainerResolve()
                 .ByMethod(BindFactory)

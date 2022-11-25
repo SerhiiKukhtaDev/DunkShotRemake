@@ -17,7 +17,7 @@ namespace Contexts.Boot.StateMachine.States
         {
             _loader.Load();
             
-            GoTo<LoadMenuState>();
+            GoTo<LoadLevel>();
         }
     }
 }

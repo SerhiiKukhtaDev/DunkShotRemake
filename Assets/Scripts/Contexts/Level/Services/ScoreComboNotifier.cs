@@ -11,11 +11,12 @@ namespace Contexts.Level.Services
 {
     public class ScoreComboNotifier : MonoBehaviour
     {
-        [SerializeField] private float appearHeightOffset = 0.3f;
         [SerializeField] private Text comboText;
         [SerializeField] private Text statusText;
-        [SerializeField] private float textScale = 1.5f;
         
+        [SerializeField] private float appearHeightOffset = 0.3f;
+        [SerializeField] private float textScale = 1.5f;
+
         private SignalBus _signalBus;
 
         [Inject]
