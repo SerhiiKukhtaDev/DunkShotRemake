@@ -1,7 +1,6 @@
 # Dunk Shot Remake
-Test task for Vira Games
 
-
+A remake of the popular game -> Dunk Shot
 
 ## Technology stack used
 
